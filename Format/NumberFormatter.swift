@@ -90,8 +90,9 @@ open class NumberFormat {
             } else if formatter.modifier == NumberFormatterSpellOutKey {
                 formattedString = nsFormatter.string(from: number)
             } else if formatter.modifier == NumberFormatterDistanceKey {
-                let distance = number as CLLocationDistance
-                formattedString = distanceFormatter.string(fromDistance: distance)
+                if let distance = number as? CLLocationDistance {
+                    formattedString = distanceFormatter.string(fromDistance: distance)
+                }
             }
         }
         guard let finalString = formattedString else {
